@@ -108,7 +108,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("detailsbymodelyear")]
+        [HttpGet("detailsbymodelyear")]//model details
         public IActionResult GetCarByModelYear(int min, int max)
         {
 
