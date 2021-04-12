@@ -7608,25 +7608,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\emiq1\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Memet\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Memet\\Desktop\\RentACar\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\emiq1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\WebAPI\\obj\\",
+      "projectPath": "C:\\Users\\Memet\\Desktop\\RentACar\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\Memet\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Memet\\Desktop\\RentACar\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\emiq1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Memet\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -7639,17 +7642,17 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\Business\\Business.csproj": {
-              "projectPath": "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\Business\\Business.csproj"
+            "C:\\Users\\Memet\\Desktop\\RentACar\\Business\\Business.csproj": {
+              "projectPath": "C:\\Users\\Memet\\Desktop\\RentACar\\Business\\Business.csproj"
             },
-            "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\Core\\Core.csproj"
+            "C:\\Users\\Memet\\Desktop\\RentACar\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\Memet\\Desktop\\RentACar\\Core\\Core.csproj"
             },
-            "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\DataAccess\\DataAccess.csproj"
+            "C:\\Users\\Memet\\Desktop\\RentACar\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Memet\\Desktop\\RentACar\\DataAccess\\DataAccess.csproj"
             },
-            "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\Entities\\Entities.csproj": {
-              "projectPath": "C:\\Users\\emiq1\\OneDrive\\Masaüstü\\RentACar\\Entities\\Entities.csproj"
+            "C:\\Users\\Memet\\Desktop\\RentACar\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\Memet\\Desktop\\RentACar\\Entities\\Entities.csproj"
             }
           }
         }
