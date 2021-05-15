@@ -1,13 +1,9 @@
-### Tanıtım Videosu: https://youtu.be/hZbNErAwtKM
-
-#### Kullanılan Teknikler
+## Techniques Used
                 
 1. AOP 
-2. KATMANLI MİMARİ
+2. LAYERED ARCHITECTURE
 3. AUTOFAC
-4. LOGLAMA
-5. SOLID PRENSİPLERİ
-6. JWT YAPILANDIRILMASI
+4. LOGGİNG
+5. SOLID
+6. JWT
 7. FLUENT VALİDATİON
-
-ÇOK DAHA FAZLASI..
