@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -8,11 +9,13 @@ namespace WebAPI.Controllers
     [ApiController]
     public class RentalsController : ControllerBase
     {
-        IRentalService _rentalService;
+        private readonly IRentalService _rentalService;
+        private readonly IPaymentService _paymentService;
 
-        public RentalsController(IRentalService rentalService)
+        public RentalsController(IRentalService rentalService, IPaymentService paymentService)
         {
             _rentalService = rentalService;
+            _paymentService = paymentService;
         }
 
         [HttpGet]
@@ -36,16 +39,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-
         [HttpPost("add")]
-        public IActionResult Add(Rental rental)
+        public IActionResult Add([FromBody] RentalPaymentDto rentalPaymentDto)
         {
-            var result = _rentalService.Add(rental);
+
+            var result = _rentalService.AddRentalAndPayment(rentalPaymentDto);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result);
+            return BadRequest(result.Message);
         }
 
         [HttpPost("delete")]
@@ -84,8 +87,7 @@ namespace WebAPI.Controllers
         [HttpGet("detailsbycar")]
         public IActionResult GetRentalByCar(int id)
         {
-
-            var result = _rentalService.GetRentalDetails(c => c.CarId == id);
+            var result = _rentalService.GetRentalDetailsById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -97,7 +99,7 @@ namespace WebAPI.Controllers
         public IActionResult GetRentalByCustomer(int id)
         {
 
-            var result = _rentalService.GetRentalDetails(c => c.CustomerId == id);
+            var result = _rentalService.GetRentalDetails();
             if (result.Success)
             {
                 return Ok(result);

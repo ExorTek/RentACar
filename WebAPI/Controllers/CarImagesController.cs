@@ -17,28 +17,28 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromForm]IFormFile file, [FromForm] CarImage carImage)
+        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _carImageService.Add(file,carImage);
-            if (!result.Success) 
-                return BadRequest(result);
-            return Ok(result);
-        }
-
-        [HttpPut]
-        public IActionResult Update([FromForm] IFormFile file,[FromForm] CarImage carImage)
-        {
-            var result = _carImageService.Update(file,carImage);
+            var result = _carImageService.Add(file, carImage);
             if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
         }
 
-        [HttpDelete]
-        public IActionResult Delete([FromForm] CarImage carImage)
+        [HttpPut]
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] CarImage carImage)
+        {
+            var result = _carImageService.Update(file, carImage);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete([FromBody] CarImage carImage)
         {
             var result = _carImageService.Delete(carImage);
-            if (!result.Success) 
+            if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
         }
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
         public IActionResult GetById(int id)
         {
             var result = _carImageService.Get(id);
-            if (!result.Success) 
+            if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
         }
@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
         public IActionResult GetByCarId(int carId)
         {
             var result = _carImageService.GetByCarId(carId);
-            if (!result.Success) 
+            if (!result.Success)
                 return BadRequest();
             return Ok(result);
         }
@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
         public IActionResult GetAll()
         {
             var result = _carImageService.GetAll();
-            if (!result.Success) 
+            if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
         }

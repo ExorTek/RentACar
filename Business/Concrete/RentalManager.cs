@@ -1,79 +1,69 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Business.ValidationRules.FluentValidation;
-using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Business.BusinessAspects.Autofac;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 
 namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
         private readonly IRentalDal _rentalDal;
+        private readonly IPaymentService _paymentService;
 
-        public RentalManager(IRentalDal rentalDal)
+        public RentalManager(IRentalDal rentalDal, IPaymentService paymentService)
         {
             _rentalDal = rentalDal;
+            _paymentService = paymentService;
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
-        [CacheRemoveAspect("IRentalService.Get")]
         [SecuredOperation("Rental.Add")]
+        [CacheRemoveAspect("IRentalService.Get")]
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate == null && _rentalDal.GetRentalDetails(I => I.CarId == rental.CarId).Count > 0)
-                return new ErrorResult(Messages.NoReturnDate);
-
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
+        [TransactionScopeAspect]
+        public IResult AddRentalAndPayment(RentalPaymentDto rentalPaymentDto)
+        {
+            _paymentService.MakePayment(rentalPaymentDto.FakeCreditCardModel);
+            _rentalDal.Add(rentalPaymentDto.Rental);
+            return new SuccessResult(Messages.RentalAddedAndPaymentSuccessful);
+        }
 
+        [CacheRemoveAspect("IRentalService.Get")]
         [SecuredOperation("Rental.Delete")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
         }
-
-        [CacheAspect]
         public IDataResult<List<Rental>> GetAll()
         {
-            if (DateTime.Now.Hour == 00)
-            {
-                return new ErrorDataResult<List<Rental>>(Messages.MaintenanceTime);
-            }
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalListed);
         }
-
-        [CacheAspect]
         [PerformanceAspect(5)]
         public IDataResult<Rental> GetById(int id)
         {
-            if (DateTime.Now.Hour == 00)
-            {
-                return new ErrorDataResult<Rental>(Messages.MaintenanceTime);
-            }
             return new SuccessDataResult<Rental>(_rentalDal.Get(b => b.Id == id));
         }
-
-        [CacheAspect]
-        public IDataResult<List<RentalDetailDto>> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
+        public IDataResult<List<RentalDetailDto>> GetRentalDetailsById(int id)
         {
-            if (DateTime.Now.Hour == 00)
-            {
-                return new ErrorDataResult<List<RentalDetailDto>>(Messages.MaintenanceTime);
-            }
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetailsById(id));
         }
-
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>
+                (_rentalDal.GetRentalDetails());
+        }
+        [CacheRemoveAspect("IRentalService.Get")]
         [SecuredOperation("Rental.Update")]
         public IResult Update(Rental rental)
         {

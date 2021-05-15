@@ -60,5 +60,15 @@
         public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
 
         public static string AuthorizationDenied = "Yetkiniz yok";
+        public static string CarRentalSuccess = "Araç Başarıyla Kiralandı";
+        public static string UserDateYearError = "Doğum Tarihi 4 Karakter Olmalıdır";
+        public static string UserIdentityError = "TC Kimlik Numarası 11 Hane Olmalıdır";
+        public static string UserDateYearNotEmpty = "Doğum Tarihi Alanı Boş Bırakılamaz";
+        public static string UserIdentityNotEmpty = "TC Kimlik Numarası Boş Bırakılamaz";
+
+        public static string CarNotFound = "Bu Id ' ye Sahip Araç Bulunamadı";
+        public static string CustomerAlreadyExists = "Bu Kullanıcı Zaten Kayıtlı";
+        public static string UserBlocked = "Kullanıcı Bloklanmış";
+        public static string RentalAddedAndPaymentSuccessful = "Ödeme Başarılı. Araç Kiralandı";
     }
 }

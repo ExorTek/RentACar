@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Core.Entities.Concrete;
+using Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -9,10 +10,12 @@ namespace WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IAuthService _authService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IAuthService authService)
         {
             _userService = userService;
+            _authService = authService;
         }
 
         [HttpGet]
@@ -24,6 +27,29 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpGet("mostrented")]
+        public IActionResult GetMostRentedUser()
+        {
+            var result = _userService.GetMostRentedUser();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("count")]
+        public IActionResult GetAllUsersCount()
+        {
+            var result = _userService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result.Data.Count);
+            }
+
+            return BadRequest(result.Message);
         }
 
         [HttpGet("id")]
@@ -60,13 +86,72 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(User user)
+        public IActionResult Update([FromBody] UserForUpdateDto userForUpdateDto)
         {
-            var result = _userService.Update(user);
+            var result = _authService.Update(userForUpdateDto.User, userForUpdateDto.Password);
+
             if (result.Success)
             {
                 return Ok(result);
             }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getlastregister")]
+        public IActionResult GetLastRegisterUser()
+        {
+            var result = _userService.GetLastRegisterUser();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        [HttpPost("updateforauthorized")]
+        public IActionResult UpdateForAuthorized(UserUpdateForAuthorizedDto userUpdateForAuthorized)
+        {
+            var result = _userService.UpdateForAuthorized(userUpdateForAuthorized);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getuserbyemail")]
+        public IActionResult GetUserByEmail(string email)
+        {
+            var result = _userService.GetByMail(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost("getuserfindeks")]
+        public IActionResult GetUserFindeks([FromBody] UserFindeksDto userFindeksDto)
+        {
+            var result = _userService.GetUserFindeks(userFindeksDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        [HttpGet("getuserclaims")]
+        public IActionResult GetUserClaims(int id)
+        {
+            var result = _userService.GetClaims(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
             return BadRequest(result);
         }
     }
